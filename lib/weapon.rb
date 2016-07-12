@@ -1,9 +1,9 @@
 class Weapon
-  attr_accessor :picked_up, :bot
-  attr_reader :name, :damage
+  attr_accessor :picked_up 
+  attr_reader :name, :damage, :bot
   def initialize(name, damage=nil)
     raise ArgumentError unless name.is_a?(String)
-    # raise ArgumentError unless damage.is_a?(Fixnum)
+    raise ArgumentError unless damage.is_a?(Fixnum)||damage.nil?
     @name = name
     @damage = damage
     @bot = nil
@@ -11,7 +11,8 @@ class Weapon
   end
 
   def bot=(bot)
-    raise ArgumentError unless bot.is_a?BattleBot || bot.nil?
+    raise ArgumentError unless ((bot.nil?) || bot.is_a?(BattleBot ))
+    @bot = bot
   end
 
   def picked_up?
